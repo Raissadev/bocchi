@@ -42,13 +42,26 @@ $ ./systemd.sh # executable script ∴ set permission to execute
 $ sqlite3 ./database/database.db < ./database/init.sql
 ```
 
+Pass Args (in root)
+```zsh
+$ ./bocchi -r # reload plt
+```
+
+```zsh
+$ ./bocchi -v <id_video> # post a single video, ex: RM4U148k5jA
+```
+
 
 ## Requirements
 ```zsh
-$ mv .env.example .env # and put of data
+$ mv .env.example .env # and put of data;
+# It is necessary to configure the yt-dlp utility;
+# You need to have ffmpeg on the machine;
+# Paths must have write and read permission;
+# If you are going to use systemd change the data to match your machine;
+# ...
 # and yes... Facebook has the feat of needing different tokens for publishing and media publishing
 ```
-
 
 the climb to the server is like the Incas did...
 

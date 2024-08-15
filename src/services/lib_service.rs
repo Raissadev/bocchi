@@ -72,11 +72,12 @@ impl LibService {
                 let _ = Self::post(&item, &outpath).await?;
                 let _ = repo::update(video_id).await;
                 let _ = Self::rm(&outpath);
+            } else {
+                return Err("Failed down".into());
             }
         }  else {
             return Err("Failed get info plt".into());
         }
-
         Ok(())
     }
     
@@ -90,6 +91,8 @@ impl LibService {
         let yt_dlp = Command::new("yt-dlp")
             .arg("-f")
             .arg("bv[height=1080]+ba/b[height=1080]")
+            .arg("--merge-output-format")
+            .arg("mp4")
             .arg(&in_path)
             .arg("-o")
             .arg(&out_path)
@@ -99,6 +102,7 @@ impl LibService {
 
         if !yt_dlp.status.success() {
             let stderr = String::from_utf8_lossy(&yt_dlp.stderr);
+            eprintln!("{:?}", stderr);
             return Err(format!("Download failed: {}", stderr).into());
         }
 
