@@ -47,6 +47,11 @@ async fn main() {
                 "-r" => {
                     let _ = sv::ls_playlist().await;
                 }
+                "-vr" => {
+                    if let Err(e) = sv::random_video().await {
+                        log::error!("Failed to get random video: {:?}", e);
+                    }
+                }
                 _ => {
                     println!("Arg unknown: {}", arg);
                 }

@@ -51,6 +51,10 @@ $ ./bocchi -r # reload plt
 $ ./bocchi -v <id_video> # post a single video, ex: RM4U148k5jA
 ```
 
+```zsh
+$ ./bocchi -vr # random video of the playlist
+```
+
 
 ## Requirements
 ```zsh

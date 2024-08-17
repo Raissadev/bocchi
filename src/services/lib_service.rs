@@ -188,9 +188,16 @@ impl LibService {
         sleep(Duration::from_secs(360)).await;
 
         println!("Init upload photo...");
+        let img_url = if let Some(ref maxres) = data.snippet.thumbnails.maxres {
+            &maxres.url
+        } else if let Some(ref standard) = data.snippet.thumbnails.standard {
+            &standard.url
+        } else {
+            &data.snippet.thumbnails.high.url
+        };
         let img_upl = im::MediaUpload {
             media_type: "IMAGE",
-            image_url: Some(&data.snippet.thumbnails.high.url),
+            image_url: Some(&img_url),
             video_url: None,
             caption: None,
             is_carousel_item: true,
