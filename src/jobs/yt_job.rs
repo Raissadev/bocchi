@@ -27,12 +27,20 @@ impl YTJob {
         let schedule = Schedule::from_str("0 0 0 * * *").expect("Invalid cron");
         loop {
             let now = Utc::now();
-            let next = schedule.upcoming(chrono::Utc).next().expect("No upcoming schedule");
-            let d_until_next = next.signed_duration_since(now).to_std().expect("Invalid duration");
+            let next = schedule
+                .upcoming(Utc)
+                .next()
+                .expect("No upcoming schedule");
+            let d_until_next = next
+                .signed_duration_since(now)
+                .to_std()
+                .expect("Invalid duration");
+    
             println!("Next execution at: {}", next);
             tokio::time::sleep(d_until_next).await;
-            if let Err(e) = serv::ls_playlist().await {
-                log::error!("Failed to list playlist: {:?}", e);
+    
+            if let Err(e) = serv::today_video().await {
+                log::error!("Failed to get today's video: {:?}", e);
             }
         }
     }
@@ -43,10 +51,18 @@ impl YTJob {
         let schedule = Schedule::from_str( "0 0 12 * * *").expect("Invalid cron");
         loop {
             let now = Utc::now();
-            let next = schedule.upcoming(chrono::Utc).next().expect("No upcoming schedule");
-            let d_until_next = next.signed_duration_since(now).to_std().expect("Invalid duration");
+            let next = schedule
+                .upcoming(Utc)
+                .next()
+                .expect("No upcoming schedule");
+            let d_until_next = next
+                .signed_duration_since(now)
+                .to_std()
+                .expect("Invalid duration");
+    
             println!("Next execution at: {}", next);
             tokio::time::sleep(d_until_next).await;
+    
             if let Err(e) = serv::random_video().await {
                 log::error!("Failed to get random video: {:?}", e);
             }
@@ -59,12 +75,20 @@ impl YTJob {
         let schedule = Schedule::from_str( "0 0 23 * * *").expect("Invalid cron");
         loop {
             let now = Utc::now();
-            let next = schedule.upcoming(chrono::Utc).next().expect("No upcoming schedule");
-            let d_until_next = next.signed_duration_since(now).to_std().expect("Invalid duration");
+            let next = schedule
+                .upcoming(Utc)
+                .next()
+                .expect("No upcoming schedule");
+            let d_until_next = next
+                .signed_duration_since(now)
+                .to_std()
+                .expect("Invalid duration");
+    
             println!("Next execution at: {}", next);
             tokio::time::sleep(d_until_next).await;
+    
             if let Err(e) = serv::today_video().await {
-                log::error!("Failed to get today video: {:?}", e);
+                log::error!("Failed to get today's video: {:?}", e);
             }
         }
     }

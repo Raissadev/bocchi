@@ -220,7 +220,7 @@ impl LibService {
         let description = format!(
             "{}: {}. \nCanal: {}\n{}\n\n\n{}",
             calc_timing(data.snippet.publishedAt.as_ref())
-        ,   &data.snippet.title
+        ,   &data.snippet.title.replace("@", "")
         ,   &data.snippet.channelTitle.as_deref().unwrap_or("unknown")
         ,   format_publish_date(data.snippet.publishedAt.as_deref())
         ,   String::from("#42 #mscgeek #rapgeek")
